@@ -3,7 +3,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from typing import Optional
 import os
 import uvicorn
-from transcribe import convert
+from transcribe import transcribe
 from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -20,13 +20,25 @@ def hello():
 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
+    # creates folder for the files if not exists
+    os.makedirs("speech/", exist_ok=True)
+    os.makedirs("transcript/", exist_ok=True)
     if file.filename.endswith('.wav'):
-        speech_file = file.filename
-        with open("speech/" + speech_file , "wb") as f:
+        curr_dir = os.path.dirname(os.path.abspath(__file__))
+        speech_file_path = os.path.join(curr_dir, 'speech', file.filename) # server/speech/file.wav
+        
+        transcript_file_path = "".join(file.filename.split('.')[:-1]) + ".txt" 
+        transcript_file_path = os.path.join(curr_dir, 'transcript', transcript_file_path) # server/transcript/file.txt
+        # saves speech file
+        with open(speech_file_path , "wb") as f:
             f.write(file.file.read())
-        transcript_file = "".join(speech_file.split('.')[:-1]) + ".txt"
-        out_path = convert(speech_file, transcript_file)
-        return FileResponse(out_path, media_type='text/plain', filename="file.txt")
+
+        transcript  = transcribe(speech_file_path)
+        
+        # saves transcript
+        with open(transcript_file_path, 'w') as f:
+            f.write(transcript)
+        return FileResponse(transcript_file_path, media_type='text/plain', filename="file.txt")
        
     else:
         raise HTTPException(status_code=400, detail="Error occurred when transcribing")

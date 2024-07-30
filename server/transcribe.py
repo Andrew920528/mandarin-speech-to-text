@@ -5,10 +5,10 @@ import os
 import time
 
 from util import *
-def convert(in_file, out_file):
+def transcribe(speech_file_path):
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     start_time = time.time()
-    speech_path = os.path.join(curr_dir,'speech',in_file)
+    speech_path = os.path.join(curr_dir,'speech',speech_file_path)
     # Replace these with your actual filename and model details
     model_name = "medium"  # Or "tiny", "small", "medium", "large"
     language = "Chinese"  # Replace with the desired language code
@@ -21,11 +21,9 @@ def convert(in_file, out_file):
     result = model.transcribe(speech_path, language=language)
     logTime(start_time, "speech transcribed")
     transcript = handle_result(result)
+    return transcript
     
-    out_path = os.path.join(curr_dir,'transcript',out_file)
-    with open(out_path, 'w') as f:
-        f.write(transcript)
-    return out_path
+   
 
 def handle_result(result):
     segments = result["segments"]
