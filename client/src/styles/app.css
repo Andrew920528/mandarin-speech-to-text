@@ -4,6 +4,12 @@
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  gap: 1rem;
+  padding: 2rem;
+  gap: 2rem;
+  box-sizing: border-box;
   align-items: center;
+}
+
+h1 {
+  margin: 0;
 }
