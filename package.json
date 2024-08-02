@@ -1,0 +1,13 @@
+{
+    "name": "ddsc_speech_transcriber",
+    "version": "1.0.0",
+    "description": "Transcribes mandarin audio to text file",
+    "scripts": {
+        "init": "cd client && npm install && npm run dev",
+        "start": "cd client && npm run dev",
+        "server": "cd server && uvicorn main:app --reload"
+    },
+    "keywords": [],
+    "author": "Andrew Hsu",
+    "license": ""
+}

@@ -1,5 +1,6 @@
-import "./App.css";
 import FileUpload from "./FileUpload/FileUpload";
+import "./styles/reset.css";
+import "./styles/app.css";
 
 function App() {
   return (

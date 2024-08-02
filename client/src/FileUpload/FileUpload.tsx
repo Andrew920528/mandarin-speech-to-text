@@ -1,20 +1,38 @@
 import {useState} from "react";
-
+import "../styles/file_upload.css";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import Button from "@mui/material/Button";
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
+  const [fileName, setFileName] = useState<string>("");
+
+  // const [files, setFiles] = useState<File[]>([]);
+  const handleFileChange = (files: FileList) => {
+    if (files.length > 0) {
+      const selectedFile = files[0];
+      if (
+        selectedFile.type === "audio/wav" ||
+        selectedFile.type === "audio/x-wav"
+      ) {
+        setFile(selectedFile);
+        setFileName(selectedFile.name);
+      } else {
+        alert("Please upload a .wav file.");
+      }
     }
   };
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const droppedFiles = event.dataTransfer.files;
+    handleFileChange(droppedFiles);
+  };
 
-  const handleUpload = async () => {
-    if (!file) {
-      alert("Please select a file first!");
-      return;
-    }
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
 
+  async function handleUpload(file: File) {
     const formData = new FormData();
     formData.append("file", file);
 
@@ -46,14 +64,61 @@ const FileUpload: React.FC = () => {
       console.error("Error uploading file:", error);
       alert("Error uploading file.");
     }
+  }
+  const handleClick = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".wav";
+    input.onchange = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      if (target.files) {
+        handleFileChange(target.files);
+      }
+    };
+    input.click();
+  };
+
+  const DragNDropInterior = () => {
+    return (
+      <div className="dnd-interior">
+        <CloudUploadIcon sx={{fontSize: "8rem", color: "#00B49B"}} />
+        <p className="dnd-text">
+          <span className="underline clickable">Click to upload</span> or drag
+          and drop
+        </p>
+        <p className="dnd-label">
+          Maximum file size is 25 MB <br /> Supported formats: .wav
+        </p>
+      </div>
+    );
   };
 
   return (
-    <div>
-      <input type="file" accept=".wav" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={loading}>
-        Upload
-      </button>
+    <div className="file-upload">
+      <div
+        className="drag-and-drop-area"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onClick={handleClick}
+      >
+        <DragNDropInterior />
+        {fileName ? fileName : ""}
+      </div>
+
+      <Button
+        variant="contained"
+        onClick={() => {
+          if (!file) {
+            console.log("No file selected");
+            return;
+          }
+          handleUpload(file);
+        }}
+        disabled={loading || !file}
+        sx={{backgroundColor: "#00B49B"}}
+      >
+        Transcribe
+      </Button>
     </div>
   );
 };
