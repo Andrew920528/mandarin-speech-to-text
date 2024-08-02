@@ -5,11 +5,13 @@ import Button from "@mui/material/Button";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 import IconButton from "@mui/material/IconButton";
 import {Delete} from "@mui/icons-material";
+import {CircularProgress} from "@mui/material";
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState<string>("");
   const handleFileChange = (files: FileList) => {
+    if (loading) return;
     if (files.length > 0) {
       const selectedFile = files[0];
       if (
@@ -33,7 +35,7 @@ const FileUpload: React.FC = () => {
     event.preventDefault();
   };
 
-  async function handleUpload(file: File) {
+  async function handleTranscribe(file: File) {
     const formData = new FormData();
     formData.append("file", file);
 
@@ -66,6 +68,7 @@ const FileUpload: React.FC = () => {
     }
   }
   const handleClick = () => {
+    if (loading) return;
     const input = document.createElement("input");
     input.type = "file";
     input.accept = ".wav";
@@ -101,9 +104,22 @@ const FileUpload: React.FC = () => {
           <p>{text}</p>
         </div>
         <div className="delete-btn">
-          <IconButton aria-label="delete" onClick={() => setFile(null)}>
-            <Delete />
-          </IconButton>
+          {loading ? (
+            <div className="file-info">
+              <p className="--label">
+                <i>Transcribing...</i>
+              </p>
+              <CircularProgress
+                color="inherit"
+                size={"1rem"}
+                sx={{margin: "0.5rem"}}
+              />
+            </div>
+          ) : (
+            <IconButton aria-label="delete" onClick={() => setFile(null)}>
+              <Delete sx={{fontSize: "1rem"}} />
+            </IconButton>
+          )}
         </div>
       </div>
     );
@@ -127,7 +143,7 @@ const FileUpload: React.FC = () => {
             console.log("No file selected");
             return;
           }
-          handleUpload(file);
+          handleTranscribe(file);
         }}
         disabled={loading || !file}
         sx={{backgroundColor: "#00B49B"}}

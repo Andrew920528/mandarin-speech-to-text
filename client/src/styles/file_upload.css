@@ -4,6 +4,11 @@
 .clickable {
   cursor: pointer;
 }
+.--label {
+  font-size: 0.8rem;
+
+  color: rgb(34, 34, 34);
+}
 .file-upload {
   display: flex;
   flex-direction: column;
