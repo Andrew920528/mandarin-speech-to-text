@@ -2,12 +2,13 @@ import {useState} from "react";
 import "../styles/file_upload.css";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Button from "@mui/material/Button";
+import AudioFileIcon from "@mui/icons-material/AudioFile";
+import IconButton from "@mui/material/IconButton";
+import {Delete} from "@mui/icons-material";
 const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState<string>("");
-
-  // const [files, setFiles] = useState<File[]>([]);
   const handleFileChange = (files: FileList) => {
     if (files.length > 0) {
       const selectedFile = files[0];
@@ -46,7 +47,6 @@ const FileUpload: React.FC = () => {
         body: formData,
       });
 
-      console.log(response);
       const blob = await response.blob();
 
       // Create a link element and set its href to a URL representing the blob
@@ -61,8 +61,8 @@ const FileUpload: React.FC = () => {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Error uploading file:", error);
-      alert("Error uploading file.");
+      console.error("Error transcribing file:", error);
+      alert("Error transcribing file.");
     }
   }
   const handleClick = () => {
@@ -93,6 +93,22 @@ const FileUpload: React.FC = () => {
     );
   };
 
+  const FileCard = ({text}: {text: string}) => {
+    return (
+      <div className="file-card">
+        <div className="file-info">
+          <AudioFileIcon sx={{fontSize: "1rem", color: "#00B49B"}} />
+          <p>{text}</p>
+        </div>
+        <div className="delete-btn">
+          <IconButton aria-label="delete" onClick={() => setFile(null)}>
+            <Delete />
+          </IconButton>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="file-upload">
       <div
@@ -102,9 +118,8 @@ const FileUpload: React.FC = () => {
         onClick={handleClick}
       >
         <DragNDropInterior />
-        {fileName ? fileName : ""}
       </div>
-
+      {file && <FileCard text={fileName} />}
       <Button
         variant="contained"
         onClick={() => {

@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
 }
 
 .drag-and-drop-area {
@@ -18,7 +19,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem;
 }
 
 .dnd-interior {
@@ -29,13 +29,30 @@
   gap: 1rem;
 }
 
-.dnd-interior .dnd-text {
-}
-
 .dnd-interior .dnd-label {
   font-size: 0.8rem;
   padding: 0;
   margin: 0;
   color: rgb(34, 34, 34);
   text-align: center;
+}
+
+.file-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background-color: white;
+  width: 80%;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.file-card .file-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
 }
