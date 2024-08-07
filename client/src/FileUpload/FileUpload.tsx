@@ -64,6 +64,7 @@ const FileUpload: React.FC = () => {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error transcribing file:", error);
+      setLoading(false);
       alert("Error transcribing file.");
     }
   }

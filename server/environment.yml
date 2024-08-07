@@ -1,0 +1,12 @@
+name: ddsc_rd_intern
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - requests
+  - beautifulsoup4
+  - lxml
+  - pandas
+  - xlrd
+  - openpyxl
+  - ipykernel
