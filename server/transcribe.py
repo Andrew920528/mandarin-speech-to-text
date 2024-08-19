@@ -8,6 +8,7 @@ from util import *
 def transcribe(speech_file_path):
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     start_time = time.time()
+    logTime(start_time, "api recieved")
     speech_path = os.path.join(curr_dir,'speech',speech_file_path)
     # Replace these with your actual filename and model details
     model_name = "medium"  # Or "tiny", "small", "medium", "large"
@@ -18,7 +19,7 @@ def transcribe(speech_file_path):
     logTime(start_time, "model loaded")
     
     # Transcribe the audio file
-    result = model.transcribe(speech_path, language=language)
+    result = model.transcribe(speech_path, language=language, verbose=True)
     logTime(start_time, "speech transcribed")
     transcript = handle_result(result)
     return transcript

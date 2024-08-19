@@ -41,6 +41,7 @@ const FileUpload: React.FC = () => {
 
     // Replace this URL with your actual upload endpoint
     const uploadUrl = "http://127.0.0.1:8000/upload";
+    // const uploadUrl = "http://172.17.1.13:8000/upload";
 
     try {
       setLoading(true);

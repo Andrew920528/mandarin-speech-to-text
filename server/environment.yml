@@ -7,6 +7,14 @@ dependencies:
   - beautifulsoup4
   - lxml
   - pandas
-  - xlrd
+  - xlrdc
   - openpyxl
   - ipykernel
+  - fastapi
+  - ffmpeg
+  - pip:
+    - whisper
+    - uvicorn
+
+# for running Node.JS (sets node environment for current session)
+# fnm env --use-on-cd | Out-String | Invoke-Expression
