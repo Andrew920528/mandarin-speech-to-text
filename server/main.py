@@ -1,3 +1,4 @@
+import sys
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from typing import Optional
@@ -5,6 +6,7 @@ import os
 import uvicorn
 from transcribe import transcribe
 from starlette.middleware.cors import CORSMiddleware
+import argparse
 
 app = FastAPI()
 app.add_middleware(
@@ -33,7 +35,7 @@ async def upload_file(file: UploadFile = File(...)):
         with open(speech_file_path , "wb") as f:
             f.write(file.file.read())
 
-        transcript  = transcribe(speech_file_path)
+        transcript  = transcribe(speech_file_path, True)
         
         # saves transcript
         with open(transcript_file_path, 'w') as f:

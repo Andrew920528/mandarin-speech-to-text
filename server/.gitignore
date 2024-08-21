@@ -1,2 +1,7 @@
 speech/
 transcript/
+dist/
+build/
+ffmpeg/
+main_cli.spec
+__pycache__/

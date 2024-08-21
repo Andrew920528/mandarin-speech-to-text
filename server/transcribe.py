@@ -3,9 +3,20 @@ import whisper
 import subprocess
 import os
 import time
-
+import sys
 from util import *
-def transcribe(speech_file_path):
+
+
+def get_ffmpeg_path():
+    # If running as a PyInstaller bundle
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, 'ffmpeg', 'ffmpeg.exe')
+    # If running as a script
+    else:
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ffmpeg', 'ffmpeg.exe')
+
+
+def transcribe(speech_file_path, verbose):
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     start_time = time.time()
     logTime(start_time, "api recieved")
@@ -19,7 +30,7 @@ def transcribe(speech_file_path):
     logTime(start_time, "model loaded")
     
     # Transcribe the audio file
-    result = model.transcribe(speech_path, language=language, verbose=True)
+    result = model.transcribe(speech_path, language=language, verbose=verbose)
     logTime(start_time, "speech transcribed")
     transcript = handle_result(result)
     return transcript
