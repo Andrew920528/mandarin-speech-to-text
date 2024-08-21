@@ -14,9 +14,14 @@ def get_ffmpeg_path():
     # If running as a script
     else:
         return os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ffmpeg', 'ffmpeg.exe')
+def set_ffmpeg_path():
+    ffmpeg_path = get_ffmpeg_path()
+    ffmpeg_dir = os.path.dirname(ffmpeg_path)
+    os.environ["PATH"] = ffmpeg_dir + os.pathsep + os.environ.get("PATH", "")
 
 
 def transcribe(speech_file_path, verbose):
+    set_ffmpeg_path()
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     start_time = time.time()
     logTime(start_time, "api recieved")

@@ -13,13 +13,10 @@ def cli(speech_file_path: str, transcript_file_name, verbose:bool):
     speech_file_extension = speech_file_path.split(".")[-1]
     if speech_file_extension not in supportedType:
         print(f"Unsupported file type. Valid files are {supportedType}.")
-        return
-    
-    os.makedirs("transcript/", exist_ok=True)
-    
+        return    
     if transcript_file_name is None:
         transcript_file_name = os.path.basename(speech_file_path).split('.')[0]
-        transcript_file_path = os.path.dirname(speech_file_path)
+    transcript_file_path = os.path.dirname(speech_file_path)
     transcript_file_path = os.path.join(transcript_file_path, 'transcript')
     os.makedirs(transcript_file_path, exist_ok=True)
     transcript_file_path = os.path.join(transcript_file_path, transcript_file_name + ".txt" )
