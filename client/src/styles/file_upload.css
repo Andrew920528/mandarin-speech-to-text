@@ -4,11 +4,7 @@
 .clickable {
   cursor: pointer;
 }
-.--label {
-  font-size: 0.8rem;
 
-  color: rgb(34, 34, 34);
-}
 .file-upload {
   display: flex;
   flex-direction: column;
@@ -17,7 +13,7 @@
 }
 
 .drag-and-drop-area {
-  height: 20rem;
+  height: 18rem;
   width: 30rem;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%2300B49BFF' stroke-width='6' stroke-dasharray='6%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
   border-radius: 8px;
@@ -60,4 +56,19 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+}
+
+.key-pop-up{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 30rem;
+  
+}
+
+.file-card-btn-group {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  align-items: center;
 }

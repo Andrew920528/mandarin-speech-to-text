@@ -20,11 +20,11 @@ def set_ffmpeg_path():
     os.environ["PATH"] = ffmpeg_dir + os.pathsep + os.environ.get("PATH", "")
 
 
-def transcribe(speech_file_path, verbose):
+def transcribe(speech_file_path, verbose,):
     set_ffmpeg_path()
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     start_time = time.time()
-    logTime(start_time, "api recieved")
+    logTime(start_time, "Transcription process started.")
     speech_path = os.path.join(curr_dir,'speech',speech_file_path)
     # Replace these with your actual filename and model details
     model_name = "medium"  # Or "tiny", "small", "medium", "large"

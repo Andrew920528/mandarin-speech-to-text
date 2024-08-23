@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  padding: 2rem;
+  padding: 1rem;
   gap: 2rem;
   box-sizing: border-box;
   align-items: center;
@@ -12,4 +12,17 @@
 
 h1 {
   margin: 0;
+}
+
+.tab-panels{
+  width: 100%;
+}
+.--label {
+  font-size: 0.8rem;
+
+  color: rgb(34, 34, 34);
+}
+
+.--center-text {
+  text-align: center;
 }
