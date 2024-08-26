@@ -1,6 +1,5 @@
-import React, { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import "../styles/popup.css";
-import styles from "./PopUp.module.scss";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 
