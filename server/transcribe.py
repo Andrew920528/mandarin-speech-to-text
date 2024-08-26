@@ -20,7 +20,7 @@ def set_ffmpeg_path():
     os.environ["PATH"] = ffmpeg_dir + os.pathsep + os.environ.get("PATH", "")
 
 
-def transcribe(speech_file_path, verbose,):
+def transcribe(speech_file_path, verbose):
     set_ffmpeg_path()
     curr_dir = os.path.dirname(os.path.abspath(__file__))
     start_time = time.time()

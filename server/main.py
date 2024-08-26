@@ -25,14 +25,12 @@ app.add_middleware(
 available_files = {}
 @app.post("/retrieve")
 async def get_transcript(payload: Dict[str, Any]):
-    print(payload)
     global available_files
     file_name = payload["file_name"]
     if file_name in available_files:
         curr_dir = os.path.dirname(os.path.abspath(__file__))
         transcript_file_name = file_name + ".txt" 
         transcript_file_path = os.path.join(curr_dir, 'transcript', transcript_file_name) # server/transcript/file.txt
-        print(transcript_file_path)
         return FileResponse(transcript_file_path, media_type='text/plain', filename=transcript_file_name)
     return {"status": "error", "msg":"The file is not ready yet, please come back later."}
 
@@ -68,7 +66,7 @@ def upload_file(file: UploadFile = File(...)):
         print("File uploaded as " + file_name)
         
         def runTranscribe():
-            transcript  = transcribe(speech_file_path, True)
+            transcript  = transcribe(speech_file_path, None)
             # transcript = "aaaa"
             stream_handler.add_to_stream(json.dumps({"status":"transcription_complete", "data": transcript}))
             # saves transcript
@@ -86,6 +84,8 @@ def upload_file(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="Error occurred when transcribing")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    HOST = "127.17.1.13"
+    # HOST = "0.0.0.0"  # local host
+    uvicorn.run(app, host=HOST, port=8000)
     
-# uvicorn main:app --reload
+# uvicorn main:app --host 127.17.1.13 --port 8000

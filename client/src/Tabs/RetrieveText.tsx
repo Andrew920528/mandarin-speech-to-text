@@ -7,7 +7,6 @@ export function RetrieveText() {
   const [loading, setLoading] = useState(false);
   async function submitForm() {
     const uploadUrl = HOST + "/retrieve";
-    console.log(keyName);
     try {
       setLoading(true);
       const response = await fetch(uploadUrl, {
@@ -29,7 +28,6 @@ export function RetrieveText() {
       } else if (contentType && contentType.includes("text/plain")) {
         // The response is a file, likely the transcript
         const blob = await response.blob();
-        console.log(blob);
         const downloadUrl = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = downloadUrl;

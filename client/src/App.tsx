@@ -3,13 +3,11 @@ import "./styles/reset.css";
 import "./styles/app.css";
 import { Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import { MemoizedTabPanel, TabPanel } from "./components/TabPanel";
+import { MemoizedTabPanel } from "./components/TabPanel";
 import { RetrieveText } from "./Tabs/RetrieveText";
 
-const LOCAL_HOST = "http://127.0.0.1:8000";
-const SERVER_HOST = "http://172.17.1.13:8000";
-
-export let HOST = LOCAL_HOST;
+// export const HOST = "http://127.0.0.1:8000";
+export const HOST = "http://172.17.1.13:8000";
 
 function a11yProps(index: number) {
   return {

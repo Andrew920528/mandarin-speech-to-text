@@ -5,13 +5,7 @@ import Button from "@mui/material/Button";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 import IconButton from "@mui/material/IconButton";
 import { ContentCopy, Delete, Download } from "@mui/icons-material";
-import {
-  CircularProgress,
-  Input,
-  InputAdornment,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+import { CircularProgress, InputAdornment, OutlinedInput } from "@mui/material";
 import { HOST } from "../App";
 import React from "react";
 import PopUp from "../components/PopUp";
@@ -49,8 +43,6 @@ const FileUpload: React.FC = () => {
     setRetrieveFileName("");
     if (files.length > 0) {
       const selectedFile = files[0];
-
-      console.log(selectedFile.type);
       const isSupported = supportedFileTypes.some(
         (ext) => selectedFile.type === `audio/${ext}`
       );
@@ -99,7 +91,6 @@ const FileUpload: React.FC = () => {
         let newChunk = decoder.decode(value);
         handleChunk(newChunk);
         total.push(newChunk);
-        console.log(newChunk);
       }
       setLoading(false);
     } catch (error) {
@@ -126,7 +117,7 @@ const FileUpload: React.FC = () => {
     try {
       const delimiter = "|T|";
       let chunks = responseChunk.split(delimiter);
-      console.log(chunks);
+
       for (let chunk of chunks) {
         if (chunk.trim() === "") continue;
         let responseChunkData = JSON.parse(chunk);
