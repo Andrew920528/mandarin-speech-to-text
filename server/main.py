@@ -88,4 +88,4 @@ if __name__ == "__main__":
     # HOST = "0.0.0.0"  # local host
     uvicorn.run(app, host=HOST, port=8000)
     
-# uvicorn main:app --host 127.17.1.13 --port 8000
+# uvicorn main:app --host 172.17.1.13 --port 8000
