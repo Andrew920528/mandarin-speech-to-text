@@ -32,4 +32,7 @@ Please install the following python packages:
 pip install fastapi
 pip install uvicorn
 pip install openai-whisper
+pip install ffmpeg
 ```
+
+ffmpeg needs to be installed in your machine
