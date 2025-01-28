@@ -1,5 +1,5 @@
 {
-    "name": "ddsc_speech_transcriber",
+    "name": "mandarin_speech_transcriber",
     "version": "1.0.0",
     "description": "Transcribes mandarin audio to text file",
     "scripts": {
