@@ -1,4 +1,4 @@
-# DDSC Text to Speech
+# Text to Speech Conversion Tool
 
 This project uses the Whisper API to transcribe Mandarin audio to text.
 
