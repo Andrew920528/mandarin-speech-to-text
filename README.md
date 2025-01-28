@@ -25,3 +25,11 @@ At root directory, please run:
 ```
 npm run server
 ```
+
+Please install the following python packages:
+
+```
+pip install fastapi
+pip install uvicorn
+pip install openai-whisper
+```
